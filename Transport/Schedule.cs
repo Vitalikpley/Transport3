@@ -19,6 +19,8 @@ namespace Transport.Models
         public static Schedule StopStation2 => new Schedule { Id = 2, TransportLineId = TransportLine.TransportLine1.Id, StopStationId = StopStation.StopStation3.Id, ArrivelTime = new TimeOnly(16, 23)};
         public static Schedule StopStation3 => new Schedule { Id = 3, TransportLineId = TransportLine.TransportLine2.Id, StopStationId = StopStation.StopStation3.Id, ArrivelTime = new TimeOnly(18, 10)};
         public static Schedule StopStation4 => new Schedule { Id = 4, TransportLineId = TransportLine.TransportLine3.Id, StopStationId = StopStation.StopStation1.Id, ArrivelTime = new TimeOnly(8, 5)};
+        public static Schedule StopStation7 => new Schedule { Id = 7, TransportLineId = TransportLine.TransportLine3.Id, StopStationId = StopStation.StopStation2.Id, ArrivelTime = new TimeOnly(8, 20)};
+        public static Schedule StopStation8 => new Schedule { Id = 8, TransportLineId = TransportLine.TransportLine3.Id, StopStationId = StopStation.StopStation3.Id, ArrivelTime = new TimeOnly(8, 50)};
         public static Schedule StopStation5 => new Schedule { Id = 5, TransportLineId = TransportLine.TransportLine6.Id, StopStationId = StopStation.StopStation6.Id, ArrivelTime = new TimeOnly(10, 56)};
         public static Schedule StopStation6 => new Schedule { Id = 6, TransportLineId = TransportLine.TransportLine5.Id, StopStationId = StopStation.StopStation5.Id, ArrivelTime = new TimeOnly(12, 54)};
 
@@ -31,6 +33,8 @@ namespace Transport.Models
             yield return StopStation4;
             yield return StopStation5;
             yield return StopStation6;
+            yield return StopStation7;
+            yield return StopStation8;
         }
     }
 }
