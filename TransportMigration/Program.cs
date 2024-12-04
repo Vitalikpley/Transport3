@@ -9,12 +9,14 @@ using (var context = new TransportDbContext())
 {
 
     //---------------------------------------------------------
+    Console.WriteLine("Вивести найбільш продаваємий квиток:");
     double findMax = context.Tickets.GroupBy(x => x.Price).Select(x => context.Tickets.Count(y => y.Price == x.Key)).Max();
     var f =context.Tickets.GroupBy(x => x.Price).Where(x => context.Tickets.Count(y => y.Price == x.Key) == findMax).Select(s => s.Key);
-    Console.WriteLine($"Найбільш продаваємий квиток коштує {f.First().ToString()}$");
+    Console.WriteLine($"Найбільш продаваємий квиток коштує {f.First().ToString()}$\n");
 
 
     //---------------------------------------------------------
+    Console.WriteLine("Вивести час коли транспорт за пеним маршрутом прибуває на задану зупинку:");
     string marshrut = "Маршрут №2";
     string Stop = "Облдержадміністрація";
     var u = context.Schedules
@@ -24,7 +26,9 @@ using (var context = new TransportDbContext())
     foreach(var time in u)
         Console.WriteLine($"{time.Type} який має {marshrut} приїжає до зупинки {Stop} о {time.ArrivelTime}");
 
+    Console.WriteLine();
     //---------------------------------------------------------
+    Console.WriteLine("Вивести зупинки транспорта за пеним маршрутом:");
     marshrut = "Маршрут №1";
     var e = context.Schedules
         .Join(context.Lines, x => x.TransportLineId, y => y.Id, (x, y) => new { y.Type, NameOfLine = y.Name, StopId = x.StopStationId, })
@@ -33,16 +37,18 @@ using (var context = new TransportDbContext())
     Console.Write($"{e.First().Type} який має {marshrut} зупиняється на:");
     foreach (var time in e)
         Console.Write($" {time.NameOfStop}");
-    Console.WriteLine();
-
+    Console.WriteLine("\n");
     //---------------------------------------------------------
+    Console.WriteLine("Вивести дійсні квитки:");
     var o = context.Tickets.Where(x => x.EndValid >  DateTime.Now);
     Console.Write($"Дійсні квитки:\n");
     foreach (var time in o)
         Console.WriteLine($"Індефікатор: {time.Id}, ціна: {time.Price}, закінчення: {time.EndValid.ToString()}");
 
 
+    Console.WriteLine();
     //---------------------------------------------------------
+    Console.WriteLine("Вивести маршрут транспорта який зупиняється на двох заданих зупинках:");
     string Stop1 = "Майдан Київський";
     string Stop2 = "Облдержадміністрація";
     var st12 = context.Schedules
